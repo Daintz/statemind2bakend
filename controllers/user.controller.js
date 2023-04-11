@@ -8,15 +8,22 @@ const getUsers = async (req = request, res = response) => {
   })
 }
 
-const putUsers = async (req = request, res = response) => {
-  const [result] = await pool.query('SELECT "method PUT" AS result')
-  res.status(201).json({
-    msg: result[0]
+const postUsers = async (req = request, res = response) => {
+  const { name, email, password } = req.body
+  const [rows] = await pool.query(
+    'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
+    [name, email, password]
+  )
+  res.json({
+    id: rows.insertId,
+    name,
+    email,
+    password
   })
 }
 
-const postUsers = async (req = request, res = response) => {
-  const [result] = await pool.query('SELECT "method POST" AS result')
+const putUsers = async (req = request, res = response) => {
+  const [result] = await pool.query('SELECT "method PUT" AS result')
   res.status(201).json({
     msg: result[0]
   })

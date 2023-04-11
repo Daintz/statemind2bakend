@@ -11,3 +11,9 @@ CREATE TABLE users (
 );
 
 DESCRIBE users;
+
+INSERT INTO users VALUES
+  (1, 'Daniel Lopez Rubio', 'daloru@gmail.com', '123456789'),
+  (2, 'Daniel Lopez', 'dalo@gmail.com', '987654321'),
+  (3, 'Daniel Rubio', 'daru@gmail.com', '789456123'),
+  (4, 'Daniel Felipe Lopez', 'dafelo@gmail.com', '456789123');

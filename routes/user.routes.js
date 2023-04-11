@@ -11,9 +11,9 @@ const router = Router()
 
 router.get('/', getUsers)
 
-router.put('/', putUsers)
-
 router.post('/', postUsers)
+
+router.put('/', putUsers)
 
 router.delete('/', deleteUsers)
 
