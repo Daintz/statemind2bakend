@@ -1,29 +1,19 @@
-const { Router, request, response } = require('express')
+const { Router } = require('express')
+const {
+  getUsers,
+  putUsers,
+  postUsers,
+  deleteUsers
+} = require('../controllers/user.controller')
 
 const router = Router()
 
-router.get('/', function (req = request, res = response) {
-  res.status(201).json({
-    msg: 'method GET'
-  })
-})
+router.get('/', getUsers)
 
-router.put('/', function (req = request, res = response) {
-  res.status(201).json({
-    msg: 'method PUT'
-  })
-})
+router.put('/', putUsers)
 
-router.post('/', function (req = request, res = response) {
-  res.status(201).json({
-    msg: 'method POST'
-  })
-})
+router.post('/', postUsers)
 
-router.delete('/', function (req = request, res = response) {
-  res.status(201).json({
-    msg: 'method DELETE'
-  })
-})
+router.delete('/', deleteUsers)
 
 module.exports = router
