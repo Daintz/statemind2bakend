@@ -9,3 +9,6 @@ lerna-debug.log*
 
 # dependencies
 node_modules
+
+# Guides
+db/database.sql

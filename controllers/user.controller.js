@@ -1,26 +1,31 @@
 const { request, response } = require('express')
+const pool = require('../db/db')
 
-const getUsers = (req = request, res = response) => {
+const getUsers = async (req = request, res = response) => {
+  const [result] = await pool.query('SELECT "method GET" AS result')
   res.status(201).json({
-    msg: 'method GET'
+    msg: result[0]
   })
 }
 
-const putUsers = (req = request, res = response) => {
+const putUsers = async (req = request, res = response) => {
+  const [result] = await pool.query('SELECT "method PUT" AS result')
   res.status(201).json({
-    msg: 'method PUT'
+    msg: result[0]
   })
 }
 
-const postUsers = (req = request, res = response) => {
+const postUsers = async (req = request, res = response) => {
+  const [result] = await pool.query('SELECT "method POST" AS result')
   res.status(201).json({
-    msg: 'method POST'
+    msg: result[0]
   })
 }
 
-const deleteUsers = (req = request, res = response) => {
+const deleteUsers = async (req = request, res = response) => {
+  const [result] = await pool.query('SELECT "method DELETE" AS result')
   res.status(201).json({
-    msg: 'method DELETE'
+    msg: result[0]
   })
 }
 
