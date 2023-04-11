@@ -1,11 +1,20 @@
-const { createPool } = require('mysql2/promise')
+const { Sequelize } = require('sequelize')
 
-const pool = createPool({
+const sequelize = new Sequelize('statemind', 'root', 'root', {
   host: 'localhost',
-  user: 'root',
-  password: 'root',
-  port: 3306,
-  database: 'statemindbd'
+  dialect: 'mysql',
+  port: 3306
 })
 
-module.exports = pool
+async function testConnection () {
+  try {
+    await sequelize.authenticate()
+    console.log('Connection has been established successfully.')
+  } catch (error) {
+    console.error('Unable to connect to the database:', error)
+  }
+}
+
+testConnection()
+
+module.exports = sequelize
