@@ -57,6 +57,15 @@ const postUsers = async (req = request, res = response) => {
 
 const putUser = async (req = request, res = response) => {
   const id = req.params.id
+  const user = await User.findOne({
+    where: { id }
+  })
+
+  if (!user) {
+    const err = new Error('User not found')
+    return res.status(404).json({ msg: err.message })
+  }
+
   const { name, email, password } = req.body
   const updateUser = await User.update(
     { name, email, password },
