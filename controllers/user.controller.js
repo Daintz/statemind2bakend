@@ -25,6 +25,16 @@ const getUser = async (req = request, res = response) => {
 
 const postUsers = async (req = request, res = response) => {
   const { name, email, password } = req.body
+
+  const userExists = await User.findOne({
+    where: { email }
+  })
+
+  if (userExists) {
+    const err = new Error('User already registered')
+    return res.status(404).json({ msg: err.message })
+  }
+
   await User.sync()
   const createUser = await User.create({
     name,
