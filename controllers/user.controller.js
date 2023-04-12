@@ -40,7 +40,7 @@ const postUsers = async (req = request, res = response) => {
   })
 }
 
-const putUsers = async (req = request, res = response) => {
+const putUser = async (req = request, res = response) => {
   const id = req.params.id
   const { name, email, password } = req.body
   const updateUser = await User.update(
@@ -69,7 +69,7 @@ const deleteUsers = async (req = request, res = response) => {
 module.exports = {
   getUsers,
   getUser,
-  putUsers,
+  putUser,
   postUsers,
   deleteUsers
 }

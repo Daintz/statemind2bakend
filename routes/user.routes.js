@@ -3,7 +3,7 @@ const { Router } = require('express')
 const {
   getUsers,
   getUser,
-  putUsers,
+  putUser,
   postUsers,
   deleteUsers
 } = require('../controllers/user.controller')
@@ -16,7 +16,7 @@ router.get('/:id', getUser)
 
 router.post('/', postUsers)
 
-router.put('/:id', putUsers)
+router.put('/:id', putUser)
 
 router.delete('/', deleteUsers)
 
