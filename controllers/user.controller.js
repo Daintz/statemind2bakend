@@ -76,6 +76,15 @@ const putUser = async (req = request, res = response) => {
 
 const deleteUser = async (req = request, res = response) => {
   const id = req.params.id
+  const user = await User.findOne({
+    where: { id }
+  })
+
+  if (!user) {
+    const err = new Error('User not found')
+    return res.status(404).json({ msg: err.message })
+  }
+
   const deleteUser = await User.destroy({
     where: {
       id
