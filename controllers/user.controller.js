@@ -41,9 +41,21 @@ const postUsers = async (req = request, res = response) => {
 }
 
 const putUsers = async (req = request, res = response) => {
-  const [result] = await pool.query('SELECT "method PUT" AS result')
-  res.status(201).json({
-    msg: result[0]
+  const id = req.params.id
+  const { name, email, password } = req.body
+  const updateUser = await User.update(
+    { name, email, password },
+    {
+      where: {
+        id
+      }
+    }
+  )
+  res.status(200).json({
+    ok: true,
+    status: 201,
+    msg: 'Updated User',
+    updateUser
   })
 }
 
