@@ -16,6 +16,12 @@ const getUser = async (req = request, res = response) => {
   const user = await User.findOne({
     where: { id }
   })
+
+  if (!user) {
+    const err = new Error('User not found')
+    return res.status(404).json({ msg: err.message })
+  }
+
   res.status(200).json({
     ok: true,
     status: 201,
