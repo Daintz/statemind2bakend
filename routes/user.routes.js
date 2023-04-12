@@ -5,7 +5,7 @@ const {
   getUser,
   putUser,
   postUsers,
-  deleteUsers
+  deleteUser
 } = require('../controllers/user.controller')
 
 const router = Router()
@@ -18,6 +18,6 @@ router.post('/', postUsers)
 
 router.put('/:id', putUser)
 
-router.delete('/', deleteUsers)
+router.delete('/:id', deleteUser)
 
 module.exports = router

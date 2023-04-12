@@ -1,5 +1,4 @@
 const { request, response } = require('express')
-const pool = require('../db/db')
 
 const User = require('../model/user.model')
 
@@ -59,10 +58,18 @@ const putUser = async (req = request, res = response) => {
   })
 }
 
-const deleteUsers = async (req = request, res = response) => {
-  const [result] = await pool.query('SELECT "method DELETE" AS result')
-  res.status(201).json({
-    msg: result[0]
+const deleteUser = async (req = request, res = response) => {
+  const id = req.params.id
+  const deleteUser = await User.destroy({
+    where: {
+      id
+    }
+  })
+  res.status(200).json({
+    ok: true,
+    status: 204,
+    msg: 'Delete User',
+    deleteUser
   })
 }
 
@@ -71,5 +78,5 @@ module.exports = {
   getUser,
   putUser,
   postUsers,
-  deleteUsers
+  deleteUser
 }
