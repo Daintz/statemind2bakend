@@ -25,7 +25,14 @@ function numbersP (str) {
 function isEmailE (str) {
   const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
 
-  return regex
+  return !regex
+}
+
+/** ************ NAME USER **************/
+function isFullNameN (str) {
+  const regex = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+(?:\s+[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+){1,5}(?:\s+[-\sa-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+)?$/.test(str)
+
+  return !regex
 }
 
 module.exports = {
@@ -33,5 +40,6 @@ module.exports = {
   upperCaseAndLowerCaseP,
   spacesP,
   numbersP,
-  isEmailE
+  isEmailE,
+  isFullNameN
 }

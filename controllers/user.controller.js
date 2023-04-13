@@ -7,7 +7,8 @@ const {
   upperCaseAndLowerCaseP,
   spacesP,
   numbersP,
-  isEmailE
+  isEmailE,
+  isFullNameN
 } = require('../helpers/validationsUser')
 
 const getUsers = async (req = request, res = response) => {
@@ -77,6 +78,11 @@ const postUsers = async (req = request, res = response) => {
 
   if (isEmailE(email)) {
     const err = new Error('Email is not valid')
+    return res.status(404).json({ msg: err.message })
+  }
+
+  if (isFullNameN(name)) {
+    const err = new Error('Name is not valid')
     return res.status(404).json({ msg: err.message })
   }
 
