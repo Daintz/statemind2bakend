@@ -1,8 +1,23 @@
-function upperCaseAndLowerCase (str) {
-  const hasUpperCase = /[A-Z]/.test(str)
-  const hasLowerCase = /[a-z]/.test(str)
-
-  return !hasUpperCase || !hasLowerCase
+function lengthP (str) {
+  return str.length < 6 || str.length > 18
 }
 
-module.exports = { upperCaseAndLowerCase }
+function upperCaseAndLowerCase (str) {
+  const regex = /^(?=.*[A-Z])(?=.*[a-z])/.test(str)
+
+  return !regex
+}
+
+function spacesP (str) {
+  const regex = /^[^\s]*$/.test(str)
+
+  return !regex
+}
+
+function numbersP (str) {
+  const regex = /^[^\s]*$/.test(str)
+
+  return !regex
+}
+
+module.exports = { lengthP, upperCaseAndLowerCase, spacesP, numbersP }

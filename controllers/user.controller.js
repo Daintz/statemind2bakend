@@ -2,7 +2,12 @@ const { request, response } = require('express')
 
 const User = require('../model/user.model')
 
-const { upperCaseAndLowerCase } = require('../helpers/passwordValidation')
+const {
+  lengthP,
+  upperCaseAndLowerCase,
+  spacesP,
+  numbersP
+} = require('../helpers/passwordValidation')
 
 const getUsers = async (req = request, res = response) => {
   const users = await User.findAll()
@@ -50,13 +55,23 @@ const postUsers = async (req = request, res = response) => {
     return res.status(404).json({ msg: err.message })
   }
 
-  if (password.length < 6 || password.length > 18) {
+  if (lengthP(password)) {
     const err = new Error('The password must have between 6 and 18 characters')
     return res.status(404).json({ msg: err.message })
   }
 
   if (upperCaseAndLowerCase(password)) {
     const err = new Error('The password must have upper case and lower case')
+    return res.status(404).json({ msg: err.message })
+  }
+
+  if (spacesP(password)) {
+    const err = new Error('Spaces are not accepted in the password')
+    return res.status(404).json({ msg: err.message })
+  }
+
+  if (numbersP(password)) {
+    const err = new Error('The password must have numbers')
     return res.status(404).json({ msg: err.message })
   }
 
