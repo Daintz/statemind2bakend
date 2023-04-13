@@ -2,6 +2,8 @@ const { request, response } = require('express')
 
 const User = require('../model/user.model')
 
+const { upperCaseAndLowerCase } = require('../helpers/passwordValidation')
+
 const getUsers = async (req = request, res = response) => {
   const users = await User.findAll()
 
@@ -50,6 +52,11 @@ const postUsers = async (req = request, res = response) => {
 
   if (password.length < 6 || password.length > 18) {
     const err = new Error('The password must have between 6 and 18 characters')
+    return res.status(404).json({ msg: err.message })
+  }
+
+  if (upperCaseAndLowerCase(password)) {
+    const err = new Error('The password must have upper case and lower case')
     return res.status(404).json({ msg: err.message })
   }
 
