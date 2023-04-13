@@ -4,6 +4,12 @@ const User = require('../model/user.model')
 
 const getUsers = async (req = request, res = response) => {
   const users = await User.findAll()
+
+  if (!users) {
+    const err = new Error('Users not found')
+    return res.status(404).json({ msg: err.message })
+  }
+
   res.status(200).json({
     ok: true,
     status: 201,
