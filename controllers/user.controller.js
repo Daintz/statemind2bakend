@@ -19,6 +19,7 @@ const getUsers = async (req = request, res = response) => {
 
 const getUser = async (req = request, res = response) => {
   const id = req.params.id
+
   const user = await User.findOne({
     where: { id }
   })
@@ -44,6 +45,11 @@ const postUsers = async (req = request, res = response) => {
 
   if (userExists) {
     const err = new Error('User already registered')
+    return res.status(404).json({ msg: err.message })
+  }
+
+  if (password.length < 6 || password.length > 18) {
+    const err = new Error('The password must have between 6 and 18 characters')
     return res.status(404).json({ msg: err.message })
   }
 
