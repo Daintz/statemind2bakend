@@ -4,10 +4,11 @@ const User = require('../model/user.model')
 
 const {
   lengthP,
-  upperCaseAndLowerCase,
+  upperCaseAndLowerCaseP,
   spacesP,
-  numbersP
-} = require('../helpers/passwordValidation')
+  numbersP,
+  isEmailE
+} = require('../helpers/validationsUser')
 
 const getUsers = async (req = request, res = response) => {
   const users = await User.findAll()
@@ -49,7 +50,6 @@ const postUsers = async (req = request, res = response) => {
   const userExists = await User.findOne({
     where: { email }
   })
-
   if (userExists) {
     const err = new Error('User already registered')
     return res.status(404).json({ msg: err.message })
@@ -60,7 +60,7 @@ const postUsers = async (req = request, res = response) => {
     return res.status(404).json({ msg: err.message })
   }
 
-  if (upperCaseAndLowerCase(password)) {
+  if (upperCaseAndLowerCaseP(password)) {
     const err = new Error('The password must have upper case and lower case')
     return res.status(404).json({ msg: err.message })
   }
@@ -72,6 +72,11 @@ const postUsers = async (req = request, res = response) => {
 
   if (numbersP(password)) {
     const err = new Error('The password must have numbers')
+    return res.status(404).json({ msg: err.message })
+  }
+
+  if (isEmailE(email)) {
+    const err = new Error('Email is not valid')
     return res.status(404).json({ msg: err.message })
   }
 
