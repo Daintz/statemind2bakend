@@ -11,7 +11,7 @@ const {
   isFullNameN
 } = require('../helpers/validationsUser')
 
-const getUsers = async (req = request, res = response) => {
+const getUsers = async(req = request, res = response) => {
   const users = await User.findAll()
 
   if (!users) {
@@ -26,7 +26,7 @@ const getUsers = async (req = request, res = response) => {
   })
 }
 
-const getUser = async (req = request, res = response) => {
+const getUser = async(req = request, res = response) => {
   const id = req.params.id
 
   const user = await User.findOne({
@@ -45,7 +45,7 @@ const getUser = async (req = request, res = response) => {
   })
 }
 
-const postUsers = async (req = request, res = response) => {
+const postUsers = async(req = request, res = response) => {
   const { name, email, password } = req.body
 
   const userExists = await User.findOne({
@@ -100,7 +100,7 @@ const postUsers = async (req = request, res = response) => {
   })
 }
 
-const putUser = async (req = request, res = response) => {
+const putUser = async(req = request, res = response) => {
   const id = req.params.id
   const user = await User.findOne({
     where: { id }
@@ -159,7 +159,7 @@ const putUser = async (req = request, res = response) => {
   })
 }
 
-const deleteUser = async (req = request, res = response) => {
+const deleteUser = async(req = request, res = response) => {
   const id = req.params.id
   const user = await User.findOne({
     where: { id }

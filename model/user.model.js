@@ -31,7 +31,7 @@ User.init(
   },
   {
     hooks: {
-      async beforeCreate (user) {
+      async beforeCreate(user) {
         if (!user.RoleId) {
           const defaultRole = await Role.findOne({ where: { name: 'User' } })
           if (defaultRole) {

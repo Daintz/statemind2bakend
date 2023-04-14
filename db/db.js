@@ -6,7 +6,7 @@ const sequelize = new Sequelize('statemind', 'root', 'root', {
   port: 3306
 })
 
-async function testConnection () {
+async function testConnection() {
   try {
     await sequelize.authenticate()
     console.log('Connection has been established successfully.')

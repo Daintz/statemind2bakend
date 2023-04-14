@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors')
 
 class Server {
-  constructor () {
+  constructor() {
     this.app = express()
     this.port = process.env.PORT
     this.userPath = '/api/users'
@@ -12,7 +12,7 @@ class Server {
     this.routes()
   }
 
-  middlewares () {
+  middlewares() {
     this.app.use(cors())
 
     this.app.use(express.json())
@@ -20,11 +20,11 @@ class Server {
     this.app.use(express.static('public'))
   }
 
-  routes () {
+  routes() {
     this.app.use(this.userPath, require('../routes/user.routes'))
   }
 
-  listen () {
+  listen() {
     this.app.listen(this.port, () => {
       console.log(`Online server in port ${this.port}`)
     })
