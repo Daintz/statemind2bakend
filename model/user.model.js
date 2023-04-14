@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require('sequelize')
 const sequelize = require('../db/db')
+const Role = require('./role.model')
 
 class User extends Model {}
 
@@ -29,9 +30,25 @@ User.init(
     }
   },
   {
+    hooks: {
+      async beforeCreate (user) {
+        if (!user.RoleId) {
+          const defaultRole = await Role.findOne({ where: { name: 'User' } })
+          if (defaultRole) {
+            user.RoleId = defaultRole.id
+          } else {
+            const newUserRole = await Role.create({ name: 'User' })
+            user.RoleId = newUserRole.id
+          }
+        }
+      }
+    },
     sequelize,
     modelName: 'User'
   }
 )
+
+User.belongsTo(Role)
+Role.hasMany(User)
 
 module.exports = User
