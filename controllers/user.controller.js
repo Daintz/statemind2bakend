@@ -1,6 +1,7 @@
 const { request, response } = require('express')
 
 const User = require('../model/user.model')
+const Role = require('../model/role.model')
 
 const {
   lengthP,
@@ -12,7 +13,17 @@ const {
 } = require('../helpers/validationsUser')
 
 const getUsers = async(req = request, res = response) => {
-  const users = await User.findAll()
+  const users = await User.findAll({
+    // attributes: {
+    //   exclude: ['RoleId']
+    // },
+    include: [
+      {
+        model: Role,
+        as: 'Role'
+      }
+    ]
+  })
 
   if (!users) {
     const err = new Error('Users not found')
@@ -30,7 +41,13 @@ const getUser = async(req = request, res = response) => {
   const id = req.params.id
 
   const user = await User.findOne({
-    where: { id }
+    where: { id },
+    include: [
+      {
+        model: Role,
+        as: 'Role'
+      }
+    ]
   })
 
   if (!user) {
