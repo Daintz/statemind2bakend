@@ -170,7 +170,13 @@ const putUser = async(req = request, res = response) => {
   )
 
   const updatedUser = await User.findOne({
-    where: { id }
+    where: { id },
+    include: [
+      {
+        model: Role,
+        as: 'Role'
+      }
+    ]
   })
 
   res.status(200).json({
