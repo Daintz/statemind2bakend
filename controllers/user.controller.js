@@ -160,7 +160,7 @@ const putUser = async(req = request, res = response) => {
     return res.status(404).json({ msg: err.message })
   }
 
-  const updateUser = await User.update(
+  await User.update(
     { name, email, password },
     {
       where: {
@@ -168,11 +168,16 @@ const putUser = async(req = request, res = response) => {
       }
     }
   )
+
+  const updatedUser = await User.findOne({
+    where: { id }
+  })
+
   res.status(200).json({
     ok: true,
     status: 201,
     msg: 'Updated User',
-    updateUser
+    updatedUser
   })
 }
 
