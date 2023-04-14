@@ -6,6 +6,7 @@ class Server {
     this.app = express()
     this.port = process.env.PORT
     this.userPath = '/api/users'
+    this.rolePath = '/api/roles'
 
     this.middlewares()
 
@@ -22,6 +23,7 @@ class Server {
 
   routes() {
     this.app.use(this.userPath, require('../routes/user.routes'))
+    this.app.use(this.rolePath, require('../routes/role.routes'))
   }
 
   listen() {
