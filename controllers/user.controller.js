@@ -112,6 +112,37 @@ const putUser = async (req = request, res = response) => {
   }
 
   const { name, email, password } = req.body
+
+  if (lengthP(password)) {
+    const err = new Error('The password must have between 6 and 18 characters')
+    return res.status(404).json({ msg: err.message })
+  }
+
+  if (upperCaseAndLowerCaseP(password)) {
+    const err = new Error('The password must have upper case and lower case')
+    return res.status(404).json({ msg: err.message })
+  }
+
+  if (spacesP(password)) {
+    const err = new Error('Spaces are not accepted in the password')
+    return res.status(404).json({ msg: err.message })
+  }
+
+  if (numbersP(password)) {
+    const err = new Error('The password must have numbers')
+    return res.status(404).json({ msg: err.message })
+  }
+
+  if (isEmailE(email)) {
+    const err = new Error('Email is not valid')
+    return res.status(404).json({ msg: err.message })
+  }
+
+  if (isFullNameN(name)) {
+    const err = new Error('Name is not valid')
+    return res.status(404).json({ msg: err.message })
+  }
+
   const updateUser = await User.update(
     { name, email, password },
     {
