@@ -188,6 +188,9 @@ const putUser = async(req = request, res = response) => {
 
   const updatedUser = await User.findOne({
     where: { id },
+    attributes: {
+      exclude: ['RoleId']
+    },
     include: [
       {
         model: Role,
