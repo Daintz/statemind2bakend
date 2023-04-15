@@ -104,16 +104,27 @@ const postUsers = async(req = request, res = response) => {
   }
 
   await User.sync()
-  const createUser = await User.create({
+  await User.create({
     name,
     email,
     password
   })
+
+  const createdUser = await User.findOne({
+    where: { email },
+    include: [
+      {
+        model: Role,
+        as: 'Role'
+      }
+    ]
+  })
+
   res.status(200).json({
     ok: true,
     status: 201,
     msg: 'Created User',
-    createUser
+    createdUser
   })
 }
 
