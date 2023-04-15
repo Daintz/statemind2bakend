@@ -14,9 +14,9 @@ const {
 
 const getUsers = async(req = request, res = response) => {
   const users = await User.findAll({
-    // attributes: {
-    //   exclude: ['RoleId']
-    // },
+    attributes: {
+      exclude: ['RoleId']
+    },
     include: [
       {
         model: Role,
