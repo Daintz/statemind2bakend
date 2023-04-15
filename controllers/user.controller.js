@@ -115,6 +115,9 @@ const postUsers = async(req = request, res = response) => {
 
   const createdUser = await User.findOne({
     where: { email },
+    attributes: {
+      exclude: ['RoleId']
+    },
     include: [
       {
         model: Role,
