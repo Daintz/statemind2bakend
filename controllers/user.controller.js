@@ -42,6 +42,9 @@ const getUser = async(req = request, res = response) => {
 
   const user = await User.findOne({
     where: { id },
+    attributes: {
+      exclude: ['RoleId']
+    },
     include: [
       {
         model: Role,
